@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nouka Yatra · নৌকা যাত্রা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Galada&family=Hind+Siliguri:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- TITLE -->
+  <section id="title" class="screen">
+    <svg class="boat-hero" viewBox="0 0 320 170" aria-hidden="true">
+      <circle cx="252" cy="40" r="22" fill="#efb126" opacity=".9"/>
+      <g class="bob">
+        <path d="M160 26 L160 112" stroke="#1d1410" stroke-width="4"/>
+        <path d="M163 30 Q214 64 196 106 L163 106 Z" fill="#f6ead0" stroke="#1d1410" stroke-width="3.5"/>
+        <path d="M157 40 Q122 74 134 106 L157 106 Z" fill="#d23b22" stroke="#1d1410" stroke-width="3.5"/>
+        <path d="M70 112 Q160 150 250 112 L238 124 Q160 154 82 124 Z" fill="#7a3d1f" stroke="#1d1410" stroke-width="3.5"/>
+        <path d="M60 106 L74 116 M260 106 L246 116" stroke="#1d1410" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="112" cy="122" r="3" fill="#efb126"/><circle cx="160" cy="130" r="3" fill="#efb126"/><circle cx="208" cy="122" r="3" fill="#efb126"/>
+      </g>
+      <g class="waves" fill="none" stroke="#36579e" stroke-width="5" stroke-linecap="round">
+        <path d="M0 146 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+        <path d="M-10 162 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="#24407e"/>
+      </g>
+    </svg>
+    <h1 class="disp">নৌকা যাত্রা</h1>
+    <p class="tag">Nouka Yatra. Row your boat through Bengal and fill your <b>jhuli</b> with souvenirs from every stop.</p>
+    <div class="alpona" style="width:min(280px,80%)"></div>
+    <button class="btn primary" id="startBtn">যাত্রা শুরু · Start the journey</button>
+    <button class="ghost" id="soundBtn" aria-pressed="true">শব্দ চালু · Sound on</button>
+  </section>
+
+  <!-- MAP -->
+  <section id="map" class="screen" hidden>
+    <div class="topbar">
+      <div class="grow"><h2 class="disp" id="mapTitle">বাংলার নদীপথ</h2><div class="en" id="mapSub">River map of Bengal</div></div>
+      <span class="jhuli" id="jhuli">ঝুলি · Bag 0/7</span>
+    </div>
+    <div class="alpona"></div>
+    <div id="mapWrap">
+      <svg id="mapSvg" viewBox="0 0 360 620" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Stops on the river">
+        <g id="decor"></g>
+        <path id="riverBank" d="M200 -10 C 40 70, 320 150, 180 230 S 40 390, 180 450 S 320 560, 170 630" fill="none" stroke="#24356b" stroke-width="60" stroke-linecap="round"/>
+        <path id="riverPath" d="M200 -10 C 40 70, 320 150, 180 230 S 40 390, 180 450 S 320 560, 170 630" fill="none" stroke="#36579e" stroke-width="42" stroke-linecap="round"/>
+        <path class="wave-dash" d="M200 -10 C 40 70, 320 150, 180 230 S 40 390, 180 450 S 320 560, 170 630" fill="none" stroke="#8fb0e8" stroke-width="2" stroke-dasharray="8 32" opacity=".7"/>
+        <g id="stopsG"></g>
+        <g id="mapBoat">
+          <path d="M-16 0 Q0 10 16 0 L12 6 Q0 13 -12 6 Z" fill="#7a3d1f" stroke="#1d1410" stroke-width="2"/>
+          <path d="M0 -2 L0 -22 M1 -20 Q12 -12 9 -3 L1 -3 Z" fill="#f6ead0" stroke="#1d1410" stroke-width="2"/>
+        </g>
+      </svg>
+    </div>
+    <div class="card" id="stopCard">
+      <div class="row"><h3 id="scBn"></h3><span class="chip" id="scChip"></span></div>
+      <div class="en" id="scEn"></div>
+      <p id="scDesc"></p>
+      <div class="row"><span class="en" id="scBest"></span><button class="btn primary" id="playBtn">খেলো · Play</button></div>
+    </div>
+  </section>
+
+  <!-- SWEET SHOP -->
+  <section id="mishti" class="screen" hidden>
+    <div class="hud">
+      <button class="ghost backBtn">← মানচিত্র · Map</button>
+      <span class="grow"></span>
+      <span class="stat"><small>সময় · Time</small> <span id="mTime">90</span></span>
+      <span class="stat"><small>পরিবেশন · Served</small> <span id="mServed">0/6</span></span>
+      <span class="stat"><small>টাকা · ₹</small> <span id="mCoins">0</span></span>
+    </div>
+    <div class="shop" id="shop">
+      <div class="awning"></div>
+      <div class="custArea">
+        <div class="cust" id="cust"></div>
+        <div class="bubble" id="bubble" role="button" tabindex="0" aria-label="Customer order. Tap to peek when hidden.">
+          <div class="say" id="say"></div>
+          <div class="order" id="order"></div>
+          <div class="pbar"><i id="pbar"></i></div>
+        </div>
+      </div>
+      <div class="plate" id="plate"><span class="lbl">থালা · Plate</span></div>
+      <div class="toast" id="mToast"></div>
+    </div>
+    <div class="counter" id="counter"></div>
+    <div class="actions">
+      <button class="btn" id="clearBtn">খালি · Clear</button>
+      <button class="btn haldi" id="serveBtn">দাও · Serve</button>
+    </div>
+  </section>
+
+  <!-- SUNDARBANS -->
+  <section id="sundarban" class="screen" hidden>
+    <div class="hud">
+      <button class="ghost backBtn">← মানচিত্র · Map</button>
+      <span class="grow"></span>
+      <span class="stat"><small>মধু · Honey</small> <span id="sHoney">0/12</span></span>
+      <span class="stat"><small>প্রাণ · Lives</small> <span id="sLives">●●●</span></span>
+      <span class="stat" id="sState"><small>শান্ত · Calm</small></span>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="sbCanvas"></canvas>
+      <div class="hint" id="sHint">Touch and hold to walk · arrow keys work too</div>
+      <div class="toast" id="sToast"></div>
+    </div>
+  </section>
+
+  <!-- BISHNUPUR -->
+  <section id="bishnupur" class="screen" hidden>
+    <div class="hud">
+      <button class="ghost backBtn">← মানচিত্র · Map</button>
+      <span class="grow"></span>
+      <span class="stat"><small>চাল · Moves</small> <span id="bpMoves">0</span></span>
+      <span class="stat"><small>সময় · Time</small> <span id="bpTime">0s</span></span>
+    </div>
+    <p class="instr"><b>Rebuild the terracotta panel.</b> Tap a tile next to the gap to slide it in.</p>
+    <div class="puzzleWrap" id="bpWrap"><div class="puzzle" id="puzzle"></div></div>
+    <div class="actions">
+      <button class="btn" id="bpPeek">ছবি দেখো · Peek</button>
+      <button class="btn" id="bpNum" aria-pressed="false">নম্বর · Numbers</button>
+    </div>
+  </section>
+
+  <!-- SHANTINIKETAN -->
+  <section id="shanti" class="screen" hidden>
+    <div class="hud">
+      <button class="ghost backBtn">← মানচিত্র · Map</button>
+      <span class="grow"></span>
+      <span class="stat"><small>নকশা · Design</small> <span id="alRound">1/3</span></span>
+      <span class="stat"><small>সময় · Time</small> <span id="alTime">30s</span></span>
+      <span class="stat"><small>আঁকা · Traced</small> <span id="alCov">0%</span></span>
+    </div>
+    <p class="instr"><b>Paint the alpona in rice paste.</b> Trace the dotted lines and tap each dot. Reach 85% before the ring runs out.</p>
+    <div class="stage"><canvas id="alCanvas"></canvas><div class="toast" id="alToast"></div></div>
+    <div class="actions"><button class="btn" id="alWipe">মুছে ফেলো · Wipe and redo</button></div>
+  </section>
+
+  <!-- KUMARTULI -->
+  <section id="kumartuli" class="screen" hidden>
+    <div class="hud">
+      <button class="ghost backBtn">← মানচিত্র · Map</button>
+      <span class="grow"></span>
+      <span class="stat"><small>ধাপ · Step</small> <span id="kuStep">1/4</span></span>
+      <span class="stat"><small>কাজ · Done</small> <span id="kuProg">0/5</span></span>
+      <span class="stat"><small>সময়</small> <span id="kuTime">150s</span></span>
+      <span class="stat"><small>নম্বর · Score</small> <span id="kuScore">100</span></span>
+    </div>
+    <p class="instr" id="kuInstr"></p>
+    <div class="stage"><canvas id="kuCanvas"></canvas><div class="toast" id="kuToast"></div></div>
+    <div class="tools" id="kuTools" hidden></div>
+  </section>
+
+  <!-- ROOFTOP KITES -->
+  <section id="ghuddi" class="screen" hidden>
+    <div class="hud">
+      <button class="ghost backBtn">← মানচিত্র · Map</button>
+      <span class="grow"></span>
+      <span class="stat"><small>কাটা · Cut</small> <span id="ktCuts">0/5</span></span>
+      <span class="stat"><small>ঘুড়ি · Kites</small> <span id="ktKites">◆◆◆</span></span>
+      <span class="stat"><small>সময়</small> <span id="ktTime">0s</span></span>
+    </div>
+    <p class="instr"><b>Drag to steer your kite.</b> Cross a rival's string to start a tangle, then tap Pull as fast as you can.</p>
+    <div class="stage"><canvas id="ktCanvas"></canvas><button class="btn primary pullBtn" id="ktPull" hidden>টানো! · Pull!</button><div class="toast" id="ktToast"></div></div>
+  </section>
+
+  <!-- DURGA PUJO -->
+  <section id="pujo" class="screen" hidden>
+    <div class="hud">
+      <button class="ghost backBtn">← মানচিত্র · Map</button>
+      <span class="grow"></span>
+      <span class="stat"><small>নম্বর · Score</small> <span id="dpScore">0</span></span>
+      <span class="stat"><small>কম্বো · Combo</small> <span id="dpCombo">0</span></span>
+      <span class="stat"><small>নিখুঁত · Accuracy</small> <span id="dpAcc">100%</span></span>
+    </div>
+    <p class="instr"><b>Dance the dhunuchi naach.</b> Tap a lane (or ← ↓ →) as each flame reaches its burner.</p>
+    <div class="stage"><canvas id="dpCanvas"></canvas><div class="toast" id="dpToast"></div></div>
+  </section>
+</div>
+
+<div class="overlay" id="result" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="rTitle">
+    <span class="kicker" id="rKicker"></span>
+    <h2 id="rTitle"></h2>
+    <p id="rSub"></p>
+    <div class="souv" id="rSouv"></div>
+    <div class="fact"><h3>জানো কি? · Did you know?</h3><p id="rFact"></p></div>
+    <div class="row">
+      <button class="btn" id="rRetry">আবার · Play again</button>
+      <button class="btn primary" id="rMap">মানচিত্র · Map</button>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

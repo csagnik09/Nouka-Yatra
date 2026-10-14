@@ -1,0 +1,149 @@
+/* Nouka Yatra · styles */
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Layout: one-screen app on a night-river indigo ground; patachitra outlines, alpona borders, sindoor + haldi accents. Single committed dark look. */
+:root{
+  --night:#121a33;      /* river at night */
+  --night2:#1b2650;     /* raised panels */
+  --river:#36579e;
+  --cream:#f6ead0;      /* rice-paste white */
+  --muted:#b9b3c9;
+  --sindoor:#d23b22;    /* vermilion */
+  --haldi:#efb126;      /* turmeric */
+  --leaf:#3f8a52;
+  --ink:#1d1410;
+  --display:'Galada','Hind Siliguri',cursive;
+  --body:'Hind Siliguri','Noto Sans Bengali',system-ui,sans-serif;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--night);color:var(--cream);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-tap-highlight-color:transparent;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--haldi);outline-offset:2px}
+#app{height:100%;box-sizing:border-box;max-width:680px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:flex;flex-direction:column}
+.screen{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px}
+.alpona{height:12px;flex:none;background:
+  radial-gradient(circle at 6px 6px,var(--cream) 2.2px,transparent 2.8px) 0 0/24px 12px,
+  radial-gradient(circle at 18px 6px,var(--sindoor) 3.2px,transparent 3.8px) 0 0/24px 12px;opacity:.85}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:400}
+.disp{font-family:var(--display)}
+.en{color:var(--muted);font-size:.86em}
+.btn{border:2.5px solid var(--ink);border-radius:999px;padding:.6em 1.2em;background:var(--cream);color:var(--ink);font-weight:600;box-shadow:0 4px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn.primary{background:var(--sindoor);color:var(--cream)}
+.btn.haldi{background:var(--haldi)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:0 4px 0 var(--ink)}
+.ghost{background:none;border:1.5px solid rgba(246,234,208,.35);border-radius:999px;padding:.35em .9em;font-size:.9em}
+
+/* Title */
+#title{justify-content:center;align-items:center;text-align:center;gap:14px}
+#title h1{font-size:clamp(3.2rem,15vw,5.2rem);line-height:1;color:var(--haldi);text-shadow:3px 3px 0 var(--sindoor)}
+#title .tag{font-size:1.05rem;max-width:30ch}
+.boat-hero{width:min(320px,86%);max-width:100%}
+.waves{animation:drift 3s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translateX(-14px)}}
+.bob{animation:bob 2.4s ease-in-out infinite;transform-origin:160px 120px}
+@keyframes bob{50%{transform:translateY(4px) rotate(-1.5deg)}}
+
+/* Map */
+.topbar{display:flex;align-items:center;gap:10px;flex:none}
+.topbar .grow{flex:1;min-width:0}
+.topbar h2{font-size:1.6rem;line-height:1.1;color:var(--haldi)}
+.jhuli{font-size:.85rem;border:1.5px solid var(--haldi);border-radius:10px;padding:.2em .6em;color:var(--haldi);white-space:nowrap;font-variant-numeric:tabular-nums}
+#mapWrap{flex:1;min-height:0;position:relative}
+#mapSvg{width:100%;height:100%;display:block}
+.stop{cursor:pointer}
+.stop circle.dot{stroke:var(--ink);stroke-width:3}
+.stop.sel circle.ring{stroke:var(--haldi);stroke-width:3;fill:none}
+.wave-dash{animation:flow 2.5s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-40}}
+.card{flex:none;background:var(--night2);border:2px solid rgba(239,177,38,.4);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.card h3{font-family:var(--display);font-size:1.5rem;line-height:1.1}
+.card p{margin:0}
+.card .row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.chip{font-size:.78rem;border-radius:999px;padding:.15em .7em;background:var(--leaf);color:var(--cream);font-weight:600}
+.chip.soon{background:#4a4f6e}
+
+/* HUD */
+.hud{display:flex;align-items:center;gap:8px;flex:none;flex-wrap:wrap}
+.hud .stat{background:var(--night2);border-radius:10px;padding:.25em .65em;font-weight:600;font-variant-numeric:tabular-nums;font-size:.92rem;white-space:nowrap}
+.hud .stat small{color:var(--muted);font-weight:500}
+.hud .grow{flex:1}
+
+/* Sweet shop */
+.shop{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;border-radius:18px;padding:12px;background:
+  repeating-linear-gradient(90deg,#7a2f1c 0 22px,#8f3a22 22px 44px);border:3px solid var(--ink);position:relative;overflow:hidden}
+.awning{position:absolute;inset:0 0 auto 0;height:16px;background:repeating-linear-gradient(90deg,var(--cream) 0 18px,var(--sindoor) 18px 36px);border-bottom:3px solid var(--ink)}
+.custArea{margin-top:14px;display:flex;align-items:flex-end;gap:12px;min-height:118px;flex:1}
+.cust{width:84px;flex:none;text-align:center;transition:transform .35s,opacity .35s}
+.cust.away{transform:translateX(-120%);opacity:0}
+.cust svg{width:84px;height:96px;display:block}
+.cust .nm{font-size:.82rem;font-weight:600;background:var(--ink);border-radius:6px;padding:0 .4em}
+.bubble{flex:1;min-width:0;background:var(--cream);color:var(--ink);border:3px solid var(--ink);border-radius:18px 18px 18px 4px;padding:8px 10px;align-self:center;cursor:pointer;position:relative}
+.bubble .say{font-size:.82rem;font-weight:600;margin-bottom:4px}
+.order{display:flex;gap:6px;min-height:46px;align-items:center;flex-wrap:wrap}
+.order svg{width:44px;height:44px}
+.order.hide svg{opacity:0}
+.order .q{display:none;font-weight:700;font-size:.85rem;color:#6d5a4c}
+.order.hide .q{display:block}
+.pbar{height:7px;border-radius:9px;background:#d8c9a8;margin-top:6px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--leaf);width:100%}
+.plate{flex:none;display:flex;align-items:center;justify-content:center;gap:8px;height:74px;border-radius:50%/40%;background:radial-gradient(ellipse at center,#fdfaf2 55%,#d9d2c0 56%,#f3eee2 70%);border:3px solid var(--ink);position:relative}
+.plate .lbl{position:absolute;bottom:-11px;font-size:.72rem;background:var(--ink);padding:0 .5em;border-radius:6px}
+.plate button{background:none;border:none;padding:0}
+.plate svg{width:48px;height:48px;display:block}
+.plate .empty{color:#8c7f6a;font-size:.85rem}
+.counter{flex:none;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.sw{background:#2a1a12;border:2.5px solid var(--ink);border-radius:12px;padding:6px 2px 4px;display:flex;flex-direction:column;align-items:center;gap:0;min-width:0;box-shadow:inset 0 -4px 0 rgba(0,0,0,.35)}
+.sw svg{width:44px;height:44px;max-width:100%}
+.sw span{font-size:.72rem;line-height:1.15;color:var(--cream);text-align:center}
+.sw:active{transform:scale(.95)}
+.actions{flex:none;display:flex;gap:10px}
+.actions .btn{flex:1}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* Sundarbans */
+.stage{flex:1;min-height:0;position:relative;border-radius:18px;overflow:hidden;border:3px solid var(--ink);touch-action:none}
+#sbCanvas{width:100%;height:100%;display:block;touch-action:none}
+.hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(18,26,51,.85);padding:.35em .9em;border-radius:999px;font-size:.85rem;white-space:nowrap;pointer-events:none;transition:opacity .6s}
+.danger{color:#ff8a6b}
+.shieldOn{color:var(--haldi)}
+
+/* Toast + overlay */
+.toast{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);background:var(--ink);color:var(--haldi);font-family:var(--display);font-size:1.5rem;padding:.2em .8em;border-radius:12px;border:2px solid var(--haldi);pointer-events:none;opacity:0;transition:opacity .2s;text-align:center;max-width:90%}
+.toast small{display:block;font-family:var(--body);font-size:.8rem;color:var(--cream)}
+.toast.on{opacity:1}
+.overlay{position:fixed;inset:0;background:rgba(10,14,30,.82);display:flex;align-items:center;justify-content:center;padding:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));z-index:10}
+.panel{width:100%;max-width:420px;background:var(--night2);border:3px solid var(--haldi);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px;max-height:100%;overflow:auto;box-sizing:border-box}
+.panel h2{font-family:var(--display);font-size:2rem;color:var(--haldi);line-height:1.1}
+.panel p{margin:0}
+.kicker{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.souv{display:flex;align-items:center;gap:10px;background:rgba(239,177,38,.12);border-radius:12px;padding:8px 10px}
+.souv svg{width:48px;height:48px;flex:none}
+.fact{border-left:3px solid var(--sindoor);padding-left:10px}
+.fact h3{font-size:.95rem;font-weight:700;color:var(--cream)}
+.fact p{color:var(--muted);font-size:.92rem}
+.panel .row{display:flex;gap:10px;flex-wrap:wrap}
+.panel .row .btn{flex:1;min-width:140px}
+.stage canvas{width:100%;height:100%;display:block;touch-action:none}
+.instr{margin:0;font-size:.88rem;color:var(--muted);flex:none}
+.instr b{color:var(--cream);font-weight:600}
+/* Bishnupur */
+.puzzleWrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.puzzle{position:relative;box-sizing:border-box;background:#3a1d10;border:4px solid var(--ink);border-radius:10px;box-shadow:0 0 0 3px #7a3d1f;overflow:hidden;max-width:100%}
+.tile{position:absolute;width:33.333%;height:33.333%;padding:0;border:1.5px solid rgba(29,20,16,.75);background-size:300% 300%;transition:left .15s,top .15s;border-radius:3px}
+.tile .num{position:absolute;top:3px;left:4px;font-size:.78rem;font-weight:700;color:var(--cream);background:rgba(29,20,16,.65);border-radius:5px;padding:0 .35em;display:none}
+.puzzle.nums .tile .num{display:block}
+.peekImg{position:absolute;inset:0;background-size:100% 100%;opacity:0;pointer-events:none;transition:opacity .2s}
+.peekImg.on{opacity:1}
+/* Kumartuli */
+.tools{flex:none;display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:none;padding:2px;font-size:.72rem;line-height:1.15;min-width:58px}
+.swatch i{width:36px;height:36px;border-radius:50%;border:3px solid var(--ink);box-shadow:0 0 0 2px rgba(246,234,208,.25);margin-bottom:2px}
+.swatch.sel i{box-shadow:0 0 0 3px var(--haldi)}
+.swatch .en{font-size:.68rem}
+/* Kites */
+.pullBtn{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-size:1.15rem;padding:.6em 2em;touch-action:manipulation}
+.pullBtn:active{transform:translateX(-50%) translateY(3px)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
